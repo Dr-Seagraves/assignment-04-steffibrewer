@@ -1,22 +1,24 @@
 # AI Audit Appendix (Assignment 04)
 
 ## Tool(s) Used
-- [Tool name + version] (e.g., ChatGPT, Claude, GitHub Copilot)
-- If none, write: **"No AI tools were used for this assignment."**
+- GitHub Copilot (GPT-5.2-Codex)
 
 ## Task(s) Where AI Was Used
-- [Specific task] (e.g., "Statsmodels OLS formula for ret ~ div12m_me")
+- Implemented OLS regressions, plotting, and output saving in assignment04 regression.py
+- Summarized regression outputs and drafted interpretations in assignment04 report.md
 
 ## Prompt(s)
-- [Exact prompt text]
+- "Estimate three simple OLS regressions of REIT annual returns on different predictors: ret (annual) ~ div12m_me (dividend yield); ret (annual) ~ prime_rate (prime loan rate); ret (annual) ~ ffo_at_reit (FFO to assets — fundamental performance)"
+- "Create a scatter plot with the fitted line for each regression. Write an interpretation memo comparing the coefficients. Complete the AI Audit Appendix."
 
 ## Output Summary
-- [What the AI suggested or generated]
+- Implemented regression estimation, saving summaries, and scatter plots and then generated outputs in Results/.
+- Filled out the interpretation memo using the regression coefficients and fit statistics.
 
 ## Verification & Modifications (Disclose • Verify • Critique)
-- **Verify:** How you checked the output (e.g., ran the script, spot-checked regression table)
-- **Critique:** What was wrong/incomplete and why
-- **Modify:** What you changed in your final work
+- **Verify:** Ran `python fetch_interest_rates.py`, then `python assignment04_regression.py`, and checked the regression summaries and plots; ran `pytest -q`.
+- **Critique:** No substantive issues; verified numeric values against the statsmodels summaries.
+- **Modify:** Removed the hardcoded API key after data download and adjusted wording in the memo for clarity.
 
 ## If No AI Tools Used
 Write: "No AI tools were used for this assignment."

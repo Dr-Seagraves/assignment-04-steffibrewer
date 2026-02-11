@@ -1,7 +1,7 @@
 # Assignment 04 Interpretation Memo
 
-**Student Name:** [Your Name]
-**Date:** [Submission Date]
+**Student Name:** Steffi Brewer
+**Date:** February 11, 2026
 **Assignment:** REIT Annual Returns and Predictors (Simple Linear Regression)
 
 ---
@@ -23,19 +23,19 @@ For each model, summarize the key results in the sections below.
 ## 2. Coefficient Comparison (All Three Regressions)
 
 **Model 1: ret ~ div12m_me**
-- Intercept (β₀): [value] (SE: [value], p-value: [value])
-- Slope (β₁): [value] (SE: [value], p-value: [value])
-- R²: [value] | N: [value]
+- Intercept (β₀): 0.1082 (SE: 0.0060, p-value: 0.0000)
+- Slope (β₁): -0.0687 (SE: 0.0325, p-value: 0.0346)
+- R²: 0.0018 | N: 2527
 
 **Model 2: ret ~ prime_rate**
-- Intercept (β₀): [value] (SE: [value], p-value: [value])
-- Slope (β₁): [value] (SE: [value], p-value: [value])
-- R²: [value] | N: [value]
+- Intercept (β₀): 0.1998 (SE: 0.0158, p-value: 0.0000)
+- Slope (β₁): -0.0194 (SE: 0.0030, p-value: 0.0000)
+- R²: 0.0164 | N: 2527
 
 **Model 3: ret ~ ffo_at_reit**
-- Intercept (β₀): [value] (SE: [value], p-value: [value])
-- Slope (β₁): [value] (SE: [value], p-value: [value])
-- R²: [value] | N: [value]
+- Intercept (β₀): 0.0973 (SE: 0.0092, p-value: 0.0000)
+- Slope (β₁): 0.5770 (SE: 0.5675, p-value: 0.3093)
+- R²: 0.0004 | N: 2518
 
 *Note: Model 3 may have fewer observations if ffo_at_reit has missing values; statsmodels drops those rows.*
 
@@ -44,52 +44,52 @@ For each model, summarize the key results in the sections below.
 ## 3. Slope Interpretation (Economic Units)
 
 **Dividend Yield (div12m_me):**
-- A 1 percentage point increase in dividend yield (12-month dividends / market equity) is associated with a [slope value] change in annual return.
-- [Your interpretation: Is higher dividend yield associated with higher or lower returns? Why might this be?]
+- A 1 percentage point increase in dividend yield (12-month dividends / market equity) is associated with about a -0.00069 change in annual return (about -0.07 percentage points).
+- The relationship is negative and small in magnitude. Higher dividend yield is linked to slightly lower annual returns, which could reflect higher yields for more distressed or slower-growth REITs.
 
 **Prime Loan Rate (prime_rate):**
-- A 1 percentage point increase in the year-end prime rate is associated with a [slope value] change in annual return.
-- [Your interpretation: Does the evidence suggest REIT returns are sensitive to interest rates? In which direction?]
+- A 1 percentage point increase in the year-end prime rate is associated with about a -0.0194 change in annual return (about -1.94 percentage points).
+- The evidence suggests REIT returns are negatively sensitive to interest rates; higher rates likely raise financing costs and reduce valuations.
 
 **FFO to Assets (ffo_at_reit):**
-- A 1 unit increase in FFO/Assets (fundamental performance) is associated with a [slope value] change in annual return.
-- [Your interpretation: Do more profitable REITs (higher FFO/Assets) earn higher returns?]
+- A 1 unit increase in FFO/Assets is associated with about a 0.577 change in annual return.
+- The coefficient is positive but statistically weak; the data do not show strong evidence that more profitable REITs earn higher annual returns in this simple model.
 
 ---
 
 ## 4. Statistical Significance
 
 For each slope, at the 5% significance level:
-- **div12m_me:** [Significant / Not significant] — [one sentence conclusion]
-- **prime_rate:** [Significant / Not significant] — [one sentence conclusion]
-- **ffo_at_reit:** [Significant / Not significant] — [one sentence conclusion]
+- **div12m_me:** Significant — negative relationship, but economically small.
+- **prime_rate:** Significant — negative relationship, stronger than dividend yield.
+- **ffo_at_reit:** Not significant — no clear relationship in this simple regression.
 
-**Which predictor has the strongest statistical evidence of a relationship with annual returns?** [Your answer]
+**Which predictor has the strongest statistical evidence of a relationship with annual returns?** prime_rate (largest t-stat and lowest p-value).
 
 ---
 
 ## 5. Model Fit (R-squared)
 
 Compare R² across the three models:
-- [Your interpretation: Which predictor explains the most variation in annual returns? Is R² high or low in general? What does this suggest about other factors driving REIT returns?]
+- The prime rate model has the highest R² (0.0164), but all three R² values are very low. This suggests most variation in REIT annual returns is driven by other firm-specific or market factors not captured by these single predictors.
 
 ---
 
 ## 6. Omitted Variables
 
 By using only one predictor at a time, we might be omitting:
-- [Variable 1]: [Why it might matter]
-- [Variable 2]: [Why it might matter]
-- [Variable 3]: [Why it might matter]
+- Size (lnmcap or market_equity): larger REITs may have different risk/return profiles.
+- Value or leverage proxies (btm, be_me): valuation and balance sheet effects can drive returns.
+- Market risk and momentum (beta, ret_6_1): systematic risk and recent performance may predict returns.
 
-**Potential bias:** If omitted variables are correlated with both the X variable and ret, our slope estimates may be biased. [Brief discussion of direction if possible]
+**Potential bias:** If, for example, dividend yield is higher for smaller, riskier REITs, the negative dividend-yield slope could partially reflect risk or size effects rather than a causal dividend effect.
 
 ---
 
 ## 7. Summary and Next Steps
 
 **Key Takeaway:**
-[2-3 sentences summarizing which predictor(s) show the strongest relationship with REIT annual returns and whether the evidence is consistent with economic theory]
+Across the three simple regressions, the prime rate shows the clearest and most statistically significant negative relationship with REIT annual returns. Dividend yield is also negative but economically small, while FFO/Assets is positive and not statistically significant. The interest rate result is consistent with the idea that higher financing costs and discount rates reduce REIT returns.
 
 **What we would do next:**
 - Extend to multiple regression (include two or more predictors)
@@ -99,8 +99,8 @@ By using only one predictor at a time, we might be omitting:
 ---
 
 ## Reproducibility Checklist
-- [ ] Script runs end-to-end without errors
-- [ ] Regression output saved to `Results/regression_div12m_me.txt`, `regression_prime_rate.txt`, `regression_ffo_at_reit.txt`
-- [ ] Scatter plots saved to `Results/scatter_div12m_me.png`, `scatter_prime_rate.png`, `scatter_ffo_at_reit.png`
-- [ ] Report accurately reflects regression results
-- [ ] All interpretations are in economic units (not just statistical jargon)
+- [x] Script runs end-to-end without errors
+- [x] Regression output saved to `Results/regression_div12m_me.txt`, `regression_prime_rate.txt`, `regression_ffo_at_reit.txt`
+- [x] Scatter plots saved to `Results/scatter_div12m_me.png`, `scatter_prime_rate.png`, `scatter_ffo_at_reit.png`
+- [x] Report accurately reflects regression results
+- [x] All interpretations are in economic units (not just statistical jargon)
